@@ -1,0 +1,18 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv
+.env
+FutAPI/Scripts
+FutAPI/pyvenv.cfg
+
+# Database
+db.sqlite3
+
+# Lib
+FutAPI/Lib
+
+# Example
+FutAPI/jogo.json
