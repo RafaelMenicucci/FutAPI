@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
+    'FutAPI.api',
 ]
 
 MIDDLEWARE = [
@@ -95,7 +95,7 @@ else:
             'PASSWORD': env('POSTGRES_PASSWORD'),
         }
     }
-    
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
