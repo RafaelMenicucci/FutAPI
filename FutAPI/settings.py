@@ -94,6 +94,7 @@ else:
             'USER': env('POSTGRES_USER'),
             'HOST': env('POSTGRES_HOST'),
             'PASSWORD': env('POSTGRES_PASSWORD'),
+            'PORT': env('POSTGRES_PORT'),
         }
     }
 
