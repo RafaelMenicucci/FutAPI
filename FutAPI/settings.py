@@ -89,7 +89,7 @@ if env('DJANGO_ENV') == 'local':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': env('POSTGRES_DATABASE'),
             'USER': env('POSTGRES_USER'),
             'HOST': env('POSTGRES_HOST'),
