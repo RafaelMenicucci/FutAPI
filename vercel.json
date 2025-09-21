@@ -2,18 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "staticfiles"
-      }
-    },
-    {
       "src": "FutAPI/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
         "runtime": "python3.9"
+      }
+    },
+    {
+      "src": "build.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles"
       }
     }
   ],
@@ -23,5 +23,6 @@
       "dest": "FutAPI/wsgi.py"
     }
   ],
-  "buildCommand": "sh build.sh"
+  "buildCommand": "sh build.sh",
+  "outputDirectory": "staticfiles"
 }
