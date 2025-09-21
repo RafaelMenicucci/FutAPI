@@ -23,6 +23,5 @@
       "dest": "FutAPI/wsgi.py"
     }
   ],
-  "outputDirectory": "staticfiles",
   "buildCommand": "sh build.sh"
 }
