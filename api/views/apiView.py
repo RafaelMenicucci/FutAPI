@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -18,9 +19,22 @@ def get_jogos(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated, IsAdminUser])
-def post_jogos(request):
+def post_jogo(request):
     serializer = JogosSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
+
+
+@api_view(["PUT"])
+def update_jogo(request, pk):
+    try:
+        jogo = Jogos.objects.get(pk=pk)
+    except Jogos.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = JogosSerializer(jogo, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
