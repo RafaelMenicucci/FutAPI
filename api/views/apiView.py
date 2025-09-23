@@ -10,11 +10,21 @@ from ..serializers.jogosSerializer import JogosSerializer
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_jogos(request):
-    print(request.user.is_staff)
-    jogos = Jogos.objects.all()
+def get_jogos(self):
+    jogos = Jogos.objects.all().order_by("id")
     serializer = JogosSerializer(jogos, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_rodada(request):
+    rodadaId = request.query_params.get("rodada")
+    if rodadaId is not None:
+        jogos = Jogos.objects.filter(rodada=rodadaId).order_by("id")
+        serializer = JogosSerializer(jogos, many=True)
+        return Response(serializer.data)
+    return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(["POST"])
@@ -28,6 +38,7 @@ def post_jogo(request):
 
 
 @api_view(["PUT"])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def update_jogo(request, pk):
     try:
         jogo = Jogos.objects.get(pk=pk)
