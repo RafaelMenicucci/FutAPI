@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAdminUser
 from ..models.jogos import Jogos
 from ..serializers.jogosSerializer import JogosSerializer
+from ..enums.time import Time
 
 
 @api_view(["GET"])
@@ -30,7 +31,20 @@ def get_rodada(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated, IsAdminUser])
 def post_jogo(request):
-    serializer = JogosSerializer(data=request.data)
+    data = request.data
+    try:
+        int(data["time_casa"])
+        time = "T" + data["time_casa"]
+        data["time_casa"] = Time[time].value
+    except ValueError:
+        pass
+    try:
+        int(data["time_fora"])
+        time = "T" + data["time_fora"]
+        data["time_fora"] = Time[time].value
+    except ValueError:
+        pass
+    serializer = JogosSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
@@ -44,7 +58,20 @@ def update_jogo(request, pk):
         jogo = Jogos.objects.get(pk=pk)
     except Jogos.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = JogosSerializer(jogo, data=request.data)
+    data = request.data
+    try:
+        int(data["time_casa"])
+        time = "T" + data["time_casa"]
+        data["time_casa"] = Time[time].value
+    except ValueError:
+        pass
+    try:
+        int(data["time_fora"])
+        time = "T" + data["time_fora"]
+        data["time_fora"] = Time[time].value
+    except ValueError:
+        pass
+    serializer = JogosSerializer(jogo, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
