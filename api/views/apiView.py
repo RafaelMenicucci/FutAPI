@@ -11,8 +11,15 @@ from ..enums.time import Time
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_jogos(self):
-    jogos = Jogos.objects.all().order_by("rodada", "id")
+def get_jogos(request):
+    encerrado = request.query_params.get("encerrado")
+    print(encerrado)
+    if encerrado is not None and encerrado == "true":
+        jogos = Jogos.objects.filter(gols_casa__isnull=False).order_by("rodada", "id")
+    elif encerrado is not None and encerrado == "false":
+        jogos = Jogos.objects.filter(gols_casa__isnull=True).order_by("rodada", "id")
+    else:
+        jogos = Jogos.objects.all().order_by("rodada", "id")
     serializer = JogosSerializer(jogos, many=True)
     return Response(serializer.data)
 
