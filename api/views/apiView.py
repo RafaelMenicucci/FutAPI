@@ -12,7 +12,7 @@ from ..enums.time import Time
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_jogos(self):
-    jogos = Jogos.objects.all().order_by("id")
+    jogos = Jogos.objects.all().order_by("rodada")
     serializer = JogosSerializer(jogos, many=True)
     return Response(serializer.data)
 
@@ -22,7 +22,7 @@ def get_jogos(self):
 def get_rodada(request):
     rodadaId = request.query_params.get("rodada")
     if rodadaId is not None:
-        jogos = Jogos.objects.filter(rodada=rodadaId).order_by("id")
+        jogos = Jogos.objects.filter(rodada=rodadaId).order_by("rodada")
         serializer = JogosSerializer(jogos, many=True)
         return Response(serializer.data)
     return Response(status=status.HTTP_404_NOT_FOUND)
