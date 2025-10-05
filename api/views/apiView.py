@@ -14,14 +14,11 @@ from ..enums.time import Time
 def get_jogos(request):
     encerrado = request.query_params.get("encerrado")
     rodadaId = request.query_params.get("rodada")
-    print(request.query_params.get("rodada"))
-    print(rodadaId)
     if encerrado is not None and encerrado == "true":
         jogos = Jogos.objects.filter(gols_casa__isnull=False).order_by("rodada", "id")
     elif encerrado is not None and encerrado == "false":
         jogos = Jogos.objects.filter(gols_casa__isnull=True).order_by("rodada", "id")
     elif rodadaId is not None:
-        print(rodadaId)
         jogos = Jogos.objects.filter(rodada=rodadaId).order_by("id")
     else:
         jogos = Jogos.objects.all().order_by("rodada", "id")
