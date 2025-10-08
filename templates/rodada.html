@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="{% static 'css/rodada.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fut API</title>
+</head>
+<body>
+    <div class="container">
+        <div class="child">
+            <p>Rodada</p>
+            
+            <form action="/staff/rodada" method="get">
+                {% csrf_token %}
+                <input type="text" id="buscarRodada" name="buscarRodada" placeholder="Rodada" required="true">
+                <br>
+
+                <button type="submit">Buscar rodada</button>
+            </form>
+
+            {% if rodadaBuscada %}
+                <p>{{ rodadaBuscada }}</p>
+                <ul>
+                    {% for jogo in jogos %}
+                         <form action="/staff/atualizar/jogo/{{ jogo.id }}/{{ jogo.rodada }}/" method="post">
+                            {% csrf_token %}
+                            <div>
+                                Ano: <input type="text" id="ano" name="ano" placeholder="Ano" required="true" value="{{ jogo.ano }}">
+                                <br>
+                                Rodada: <input type="text" id="rodada" name="rodada" placeholder="Rodada" required="true" value="{{ jogo.rodada }}">
+                                <br>
+                                Time casa: <input type="text" id="time_casa" name="time_casa" placeholder="Time casa" required="true" value="{{ jogo.time_casa }}">
+                                <br>
+                                Time fora: <input type="text" id="time_fora" name="time_fora" placeholder="Time fora" required="true" value="{{ jogo.time_fora }}">
+                                <br>
+                                Gols casa: <input type="text" id="gols_casa" name="gols_casa" placeholder="Gols casa" value="{{ jogo.gols_casa|default_if_none:"" }}">
+                                <br>
+                                Gols fora: <input type="text" id="gols_fora" name="gols_fora" placeholder="Gols fora" value="{{ jogo.gols_fora|default_if_none:"" }}">
+                                <br>
+                                Chutes casa: <input type="text" id="chutes_casa" name="chutes_casa" placeholder="Chutes casa" value="{{ jogo.chutes_casa|default_if_none:"" }}">
+                                <br>
+                                Chutes fora: <input type="text" id="chutes_fora" name="chutes_fora" placeholder="Chutes fora" value="{{ jogo.chutes_fora|default_if_none:"" }}">
+                                <br>
+                                Defesa casa: <input type="text" id="defesa_casa" name="defesa_casa" placeholder="Defesa casa" value="{{ jogo.defesa_casa|default_if_none:"" }}">
+                                <br>
+                                Defesa fora: <input type="text" id="defesa_fora" name="defesa_fora" placeholder="Defesa fora" value="{{ jogo.defesa_fora|default_if_none:"" }}">
+                                <br>
+                                Escanteio casa: <input type="text" id="escanteio_casa" name="escanteio_casa" placeholder="Escanteio casa" value="{{ jogo.escanteio_casa|default_if_none:"" }}">
+                                <br>
+                                Escanteio fora: <input type="text" id="escanteio_fora" name="escanteio_fora" placeholder="Escanteio fora" value="{{ jogo.escanteio_fora|default_if_none:"" }}">
+                                <br>
+                                Faltas casa: <input type="text" id="faltas_casa" name="faltas_casa" placeholder="Faltas casa" value="{{ jogo.faltas_casa|default_if_none:"" }}">
+                                <br>
+                                Faltas fora: <input type="text" id="faltas_fora" name="faltas_fora" placeholder="Faltas fora" value="{{ jogo.faltas_fora|default_if_none:"" }}">
+                                <br>
+                                Amarelo casa: <input type="text" id="amarelo_casa" name="amarelo_casa" placeholder="Amarelo casa" value="{{ jogo.amarelo_casa|default_if_none:"" }}">
+                                <br>
+                                Amarelo fora: <input type="text" id="amarelo_fora" name="amarelo_fora" placeholder="Amarelo fora" value="{{ jogo.amarelo_fora|default_if_none:"" }}">
+                                <br>
+                                Vermelho casa: <input type="text" id="vermelho_casa" name="vermelho_casa" placeholder="Vermelho casa" value="{{ jogo.vermelho_casa|default_if_none:"" }}">
+                                <br>
+                                Vermelho fora: <input type="text" id="vermelho_fora" name="vermelho_fora" placeholder="Vermelho fora" value="{{ jogo.vermelho_fora|default_if_none:"" }}">
+                                <br>
+                                <button type="submit">Salvar</button>
+                            </div>
+                        </form>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>

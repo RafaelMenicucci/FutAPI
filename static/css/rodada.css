@@ -1,0 +1,90 @@
+/* style.css */
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
+.child {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 1000px;
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    padding: 10px 14px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul div {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+ul div input {
+    width: 100%;
+    margin-top: 4px;
+    box-sizing: border-box;
+}
